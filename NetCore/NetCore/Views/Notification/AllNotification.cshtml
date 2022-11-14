@@ -1,0 +1,32 @@
+﻿@using EntityLayer.Concrete
+@model List<Notification>
+@{
+    ViewData["Title"] = "AllNotification";
+    Layout = "~/Views/Shared/WriterLayout.cshtml";
+}
+
+<h1>Bildirimler</h1>
+
+<table class="table table-bordered">
+    <tr>
+        <th>#</th>
+        <th>Bildirim</th>
+        <th>Tarih</th>
+        <th>Kaç saat oldu</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.NotificationID</td>
+            <td>@item.NotificationDetails</td>
+            @{
+                var date = DateTime.Now.Hour;
+                var date1 = item.NotificationDate.Hour;
+                int DateFark = Convert.ToInt32(date - date1);
+            }
+            <td>@item.NotificationDate.ToShortDateString()</td>
+            <td>@DateFark saat önce</td>
+        </tr>
+    }
+</table>
+
